@@ -26,20 +26,20 @@ object JavaBitSet extends TestSize {
   def main(args: Array[String]) {
     println("######     " + this.getClass())
     println("######     " + sizeStr)
-    val tnext_1 = TimeIt.run(10000000, () => { it.next })
+    val tnext_1 = TimeIt.timeInNanos(10000000, () => { it.next })
     println("1*next\t" + tnext_1)
-    println("count\t" + (TimeIt.run(10000000, () => {
+    println("count\t" + (TimeIt.timeInNanos(10000000, () => {
       it.next.cardinality()
     }) - tnext_1))
-    println("isEmpty\t" + (TimeIt.run(10000000, () => {
+    println("isEmpty\t" + (TimeIt.timeInNanos(10000000, () => {
       it.next.isEmpty()
     }) - tnext_1))
-    println("shift\t" + (TimeIt.run(10000000, () => {
+    println("shift\t" + (TimeIt.timeInNanos(10000000, () => {
       val bi = it.next
 	  bi.get(1, bi.length())
     }) - tnext_1))
 
-    println("cshift\t" + (TimeIt.run(10000000, () => {
+    println("cshift\t" + (TimeIt.timeInNanos(10000000, () => {
       val bi = it.next
 
       val bi2 = bi.get(1, bi.length())
@@ -48,10 +48,10 @@ object JavaBitSet extends TestSize {
       } else bi2
     }) - tnext_1))
 
-    val tnext_2 = TimeIt.run(10000000, () => { it.next; it.next })
+    val tnext_2 = TimeIt.timeInNanos(10000000, () => { it.next; it.next })
     println("2*next\t" + tnext_2)
-    println("&\t" + (TimeIt.run(10000000, () => { it.next.and(it.next) }) - tnext_2))
-    println("|\t" + (TimeIt.run(10000000, () => { it.next.or(it.next) }) - tnext_2))
-    println("xor\t" + (TimeIt.run(10000000, () => { it.next.xor(it.next) }) - tnext_2))
+    println("&\t" + (TimeIt.timeInNanos(10000000, () => { it.next.and(it.next) }) - tnext_2))
+    println("|\t" + (TimeIt.timeInNanos(10000000, () => { it.next.or(it.next) }) - tnext_2))
+    println("xor\t" + (TimeIt.timeInNanos(10000000, () => { it.next.xor(it.next) }) - tnext_2))
   }
 }

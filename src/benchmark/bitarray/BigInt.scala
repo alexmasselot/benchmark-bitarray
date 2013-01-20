@@ -26,34 +26,35 @@ object BigInt extends TestSize{
     println("######     " + this.getClass())
     println("######     " + sizeStr)
 
-    val tnext_1 = TimeIt.run(10000000, () => { it.next })
+    val tnext_1 = TimeIt.timeInNanos(10000000, () => { it.next })
     println("1*next\t" + tnext_1)
-    println("~\t" + (TimeIt.run(10000000, () => {
+    println("~\t" + (TimeIt.timeInNanos(10000000, () => {
       ~it.next
     }) - tnext_1))
-    println("count\t" + (TimeIt.run(10000000, () => {
+    println("count\t" + (TimeIt.timeInNanos(10000000, () => {
       it.next.bitCount
     }) - tnext_1))
-    println("rev\t" + (TimeIt.run(10000000, () => {
+    println("isEmpty\t" + (TimeIt.timeInNanos(10000000, () => {
+      it.next == 0
+    }) - tnext_1))
+    println("rev\t" + (TimeIt.timeInNanos(10000000, () => {
       val bi: BigInt = 0
       (bi.flipBit(maxBit) - 1) &~ it.next
     }) - tnext_1))
-    println("shift\t" + (TimeIt.run(10000000, () => {
+    println("shift\t" + (TimeIt.timeInNanos(10000000, () => {
       it.next >>1
     }) - tnext_1))
-    println("cshift\t" + (TimeIt.run(10000000, () => {
+    println("cshift\t" + (TimeIt.timeInNanos(10000000, () => {
       val bi = it.next
       val bit0 = bi.testBit(0)
       val bi2 = bi >> 1
       if (bit0) bi2.setBit(maxBit - 1) else bi2
     }) - tnext_1))
-    
-    
 
-    val tnext_2 = TimeIt.run(10000000, () => { it.next; it.next })
+    val tnext_2 = TimeIt.timeInNanos(10000000, () => { it.next; it.next })
     println("2*next\t" + tnext_2)
-    println("&\t" + (TimeIt.run(10000000, () => { it.next & it.next }) - tnext_2))
-    println("|\t" + (TimeIt.run(10000000, () => { it.next | it.next }) - tnext_2))
-    println("xor\t" + (TimeIt.run(10000000, () => { it.next ^ it.next }) - tnext_2))
+    println("&\t" + (TimeIt.timeInNanos(10000000, () => { it.next & it.next }) - tnext_2))
+    println("|\t" + (TimeIt.timeInNanos(10000000, () => { it.next | it.next }) - tnext_2))
+    println("xor\t" + (TimeIt.timeInNanos(10000000, () => { it.next ^ it.next }) - tnext_2))
   }
 }

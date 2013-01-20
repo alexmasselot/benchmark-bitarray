@@ -1,7 +1,7 @@
 package benchmark.bitarray
 
 object TimeIt {
-  def run(n: Int, f: () => Unit) = {
+  def timeInNanos(n: Int, f: () => Unit) = {
     //warm up
     var i = 0;
     while (i < 100) {
